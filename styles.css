@@ -309,3 +309,227 @@ body{
   .map-wrap{ height: 300px; }
 }
 
+:target{ scroll-margin-top: 84px; } /* matches sticky nav height */
+/* ===== Footer (beefed up) ===== */
+.footer{
+  background: var(--bg-2);
+  border-top: 1px solid var(--line);
+  margin-top: 40px;
+}
+.footer__grid{
+  display: grid;
+  grid-template-columns: 1.2fr .9fr .6fr;
+  gap: 26px;
+  padding: 28px 22px;
+}
+.footer__brand .brand{ margin-bottom: 6px }
+.footer__brand p{ margin: 8px 0 14px }
+
+.social{ display:flex; gap:10px }
+.social__btn{
+  display:grid; place-items:center;
+  width:36px; height:36px; border-radius:999px;
+  border:1px solid var(--line); color:var(--cream);
+  background: var(--bg-3); opacity:.9; transition:opacity .15s, transform .08s;
+}
+.social__btn:hover{ opacity:1 }
+.social__btn:active{ transform: translateY(1px) }
+
+.footer__heading{ margin:0 0 8px }
+.footer__list, .footer__links{ list-style:none; padding:0; margin:0 }
+.footer__list li{ margin:6px 0 }
+.footer__links li{ margin:6px 0 }
+.footer__links a{ color:var(--cream); text-decoration:none; opacity:.9 }
+.footer__links a:hover{ opacity:1; text-decoration:underline }
+
+.footer__cta{ display:flex; gap:10px; margin-top:12px }
+
+.footer__bottom{
+  border-top:1px solid var(--line);
+  background: var(--bg);
+}
+.footer__bottom__row{
+  height:56px; display:flex; align-items:center; justify-content:space-between;
+}
+.credit{ color:var(--muted); text-decoration:underline dotted }
+.credit:hover{ color:var(--cream) }
+
+@media (max-width: 980px){
+  .footer__grid{ grid-template-columns: 1fr 1fr }
+}
+@media (max-width: 560px){
+  .footer__grid{ grid-template-columns: 1fr; gap:18px }
+  .footer__bottom__row{ flex-direction:column; height:auto; gap:6px; padding:12px 0 }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Header hide/reveal on scroll */
+.nav{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  transition: transform .25s ease, background-color .2s ease, box-shadow .2s ease;
+  will-change: transform;
+}
+
+/* slide away */
+.nav--hidden{
+  transform: translateY(-100%);
+}
+
+/* become more solid after leaving the hero */
+.nav--solid{
+  background: rgba(33,47,34,.92); /* deeper than your default */
+  box-shadow: 0 6px 24px rgba(0,0,0,.35);
+}
+
+/* prevents content jump when anchor-scrolling to sections */
+:target{ scroll-margin-top: 84px; }
+
+/* ===== Feature split (food visual above menu) ===== */
+.feature-split{
+  display:grid; gap:22px; align-items:center;
+  grid-template-columns: 1.05fr .95fr;
+  margin: 18px 0 22px;
+  background: var(--bg-2);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: clip;
+}
+.feature-split__text{ padding:20px 22px }
+.feature-split__text h2{ margin:.2em 0 .4em 0 }
+.feature-split__media{ margin:0; line-height:0; background: var(--bg-3) }
+.feature-split__media img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  aspect-ratio: 4 / 3; filter: saturate(1.02) contrast(1.04);
+}
+
+@media (max-width: 980px){
+  .feature-split{ grid-template-columns:1fr }
+  .feature-split__media img{ aspect-ratio: 16 / 10 }
+}
+
+/* ===== Visual band (bench transition) ===== */
+.visual-band{
+  position: relative; min-height: 44vh;
+  display:grid; place-items:center; text-align:center;
+  margin: 40px 0; border-radius: var(--radius); overflow:hidden;
+  border:1px solid var(--line); box-shadow: var(--shadow);
+}
+.visual-band__img{
+  position:absolute; inset:0;
+  background-size: cover; background-position: center;
+  filter: saturate(.96) contrast(1.04) brightness(.96);
+}
+.visual-band--bench .visual-band__img{
+  background-image: url('images/bench.png');
+}
+/* readable wash, subtle brand tint */
+.visual-band::after{
+  content:""; position:absolute; inset:0;
+  background:
+    linear-gradient(180deg, rgba(20,30,22,.25) 0%, rgba(20,30,22,.45) 80%),
+    radial-gradient(900px 420px at 70% -10%, rgba(199,179,122,.18), transparent 60%);
+  pointer-events:none;
+}
+.visual-band__content{
+  position:relative; z-index:1;
+  background: rgba(20,30,22,.45);
+  border:1px solid rgba(255,255,255,.08);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+}
+.visual-band__content h2{ margin:.2em 0 .25em 0 }
+
+@media (max-width:560px){
+  .visual-band{ min-height: 36vh; }
+  .visual-band__content{ width:min(92%, 520px) }
+}
+
+.bench-section {
+  position: relative;
+}
+
+.bench-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 15, 11, 0) 0%, rgba(11, 15, 11, 0.9) 100%);
+}
+
+/* Food Hero */
+.food-hero img {
+  width: 100%;
+  height: auto;
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+  margin: 4rem 0 2rem;
+  object-fit: cover;
+}
+
+/* Bench Transition */
+.bench-section {
+  width: 100%;
+  overflow: hidden;
+  margin-top: 5rem;
+  border-radius: 20px;
+}
+
+.bench-section img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  opacity: 0.9;
+  transition: opacity 0.3s ease;
+}
+
+.bench-section img:hover {
+  opacity: 1;
+}
+/* ===== Bench Parallax ===== */
+.bench-section{
+  position: relative;
+  height: clamp(38vh, 52vh, 60vh);   /* nice view height band */
+  margin: 42px 0;
+  border-radius: var(--radius);
+  overflow: clip;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  background: var(--bg-2);
+}
+
+.bench-media{
+  position: absolute; inset: 0;
+  will-change: transform;
+}
+
+/* Make the image slightly oversized so we can move it without exposing edges */
+.parallax-img{
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);          /* baseline center */
+  width: 110%; height: auto;                 /* overscan for movement */
+  min-height: 120%;                           /* ensure full cover on tall screens */
+  object-fit: cover; display: block;
+  filter: saturate(.98) contrast(1.04) brightness(.97);
+}
+
+/* Optional caption styling */
+.bench-caption{
+  position: relative; z-index: 1;
+  inset: 0;
+  display: grid; place-items: center;
+  text-align: center;
+  padding: 12px;
+}
+
+/* Reduce motion if the user prefers */
+@media (prefers-reduced-motion: reduce){
+  .parallax-img{ transition: none !important; }
+}
+
