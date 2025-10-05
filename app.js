@@ -23,62 +23,159 @@ document.addEventListener('click', (e) => {
   });
 });
 
-// Render menu if the grids exist on this page
-(async function () {
-  const foodGrid  = document.getElementById('grid-food');
-  const buildGrid = document.getElementById('grid-build');
-  const drinkGrid = document.getElementById('grid-drinks');
-  if (!foodGrid || !buildGrid || !drinkGrid) return; // not on this page
+// ===== MENU RENDER: START (REPLACE THIS WHOLE BLOCK) =====
+const $ = (s) => document.querySelector(s);
 
+const formatPrice = (item) => {
+  if (item.sizes && (item.sizes.small || item.sizes.large)) {
+    const parts = [];
+    if (item.sizes.small) parts.push(`S $${Number(item.sizes.small).toFixed(0)}`);
+    if (item.sizes.large) parts.push(`L $${Number(item.sizes.large).toFixed(0)}`);
+    return parts.join(' · ');
+  }
+  if (item.priceSmall || item.priceLarge) {
+    const parts = [];
+    if (item.priceSmall) parts.push(`S $${Number(item.priceSmall).toFixed(0)}`);
+    if (item.priceLarge) parts.push(`L $${Number(item.priceLarge).toFixed(0)}`);
+    return parts.join(' · ');
+  }
+  if (item.price || item.price === 0) return `$${Number(item.price).toFixed(0)}`;
+  return '';
+};
+
+const card = (item) => `
+  <article class="card--item">
+    <img class="item__img" src="${item.image || 'images/placeholder-generic.jpg'}" alt="${item.name}">
+    <div class="item__body">
+      <div class="item__title">
+        <h3>${item.name}</h3>
+        <span class="item__price ${item.sizes || item.priceSmall || item.priceLarge ? 'item__price--multi' : ''}">
+          ${formatPrice(item)}
+        </span>
+      </div>
+      ${item.desc ? `<p class="item__desc">${item.desc}</p>` : ''}
+      ${item.options ? `<ul class="list muted" style="margin-top:8px">${item.options.map(o=>`<li>${o.name} — $${o.price}</li>`).join('')}</ul>` : '' }
+    </div>
+  </article>
+`;
+
+const eggsCard = (eggs) => `
+  <article class="card--item">
+    <div class="item__body">
+      <div class="item__title">
+        <h3>${eggs.name}</h3>
+        <span class="item__price">${formatPrice(eggs)}</span>
+      </div>
+      <p class="item__desc">${eggs.desc}</p>
+      ${eggs.gfOption ? `<p class="muted" style="margin-top:8px">GF option — $${eggs.gfOption}</p>` : '' }
+    </div>
+  </article>
+`;
+
+const renderExtras = (title, items) => {
+  $('#menu-extras').innerHTML = `
+    <h3>${title}</h3>
+    <ul>
+      ${items.map(x => `
+        <li><span>${x.name}</span><span class="price">${x.price < 1 ? `$${x.price.toFixed(2)}` : `$${Number(x.price).toFixed(0)}`}</span></li>
+      `).join('')}
+    </ul>
+  `;
+};
+
+// Build-Your-Own groups
+const byoGroup = (group) => `
+  <section class="byo-group">
+    <div class="byo-group__head"><h3>${group.title}</h3></div>
+    <ul class="byo-list">
+      ${group.items.map(i => `
+        <li class="byo-item">
+          <span class="byo-name">${i.name}</span>
+          <span class="byo-price">$${Number(i.price).toFixed(0)}</span>
+        </li>
+      `).join('')}
+    </ul>
+  </section>
+`;
+
+document.addEventListener('click', (e) => {
+  const tab = e.target.closest('[data-tab]');
+  if (!tab) return;
+  const name = tab.getAttribute('data-tab');
+
+  document.querySelectorAll('.tabs button').forEach(b => {
+    const active = b === tab;
+    b.classList.toggle('is-active', active);
+    b.setAttribute('aria-selected', active ? 'true' : 'false');
+  });
+
+  document.querySelectorAll('.pane').forEach(p => {
+    p.classList.toggle('is-active', p.id === `pane-${name}`);
+  });
+
+  // ⬇️ NEW: hide/show the Extras aside
+  const aside = document.getElementById('menu-extras');
+  if (!window._MENU || !aside) return;
+  if (name === 'food') {
+    aside.style.display = 'block';
+    renderExtras('Extras', window._MENU.food.extras);
+  } else if (name === 'drinks') {
+    aside.style.display = 'block';
+    renderExtras('Add-ons', window._MENU.drinks.extras);
+  } else if (name === 'build') {
+    // Hide extras on Build Your Own
+    aside.style.display = 'none';
+  }
+});
+
+
+(async function(){
   const res = await fetch('data/menu.json', { cache: 'no-store' });
   const menu = await res.json();
+  window._MENU = menu;
 
-  const card = (item) => `
-    <article class="card--item">
-      <img class="item__img" src="${item.image || 'images/placeholder-generic.jpg'}" alt="${item.name}">
-      <div class="item__body">
-        <div class="item__title">
-          <h3>${item.name}</h3>
-          <span class="item__price">${item.price ? '$'+item.price : ''}</span>
-        </div>
-        ${item.desc ? `<p class="item__desc">${item.desc}</p>` : ''}
-      </div>
-    </article>
-  `;
+  // FOOD
+  $('#grid-food-mains').innerHTML = (menu.food?.mains || []).map(card).join('');
+  if (menu.food?.eggs) $('#grid-food-eggs').innerHTML = eggsCard(menu.food.eggs);
 
-  // Food
-  foodGrid.innerHTML = menu.food.map(card).join('');
+// BUILD
+const groups = menu.build || [];
+const buildEl = document.getElementById('build-groups');
 
-  // Build-your-own — compact grouped lists + showcase tile
-  const byGroup = menu.build.reduce((acc, item) => {
-    (acc[item.group || 'Other'] ??= []).push(item);
-    return acc;
-  }, {});
+// 1) Render the BYO groups (text cards)
+buildEl.innerHTML = groups.map(byoGroup).join('');
 
-  buildGrid.outerHTML = `<div id="grid-build" class="byogroups">
-    ${Object.entries(byGroup).map(([groupName, items]) => `
-      <section class="byo-group">
-        <header class="byo-group__head"><h3>${groupName}</h3></header>
-        <ul class="byo-list">
-          ${items.map(i => `
-            <li class="byo-item">
-              <span class="byo-name">${i.name}</span>
-              <span class="byo-price">$${i.price}</span>
-            </li>`).join('')}
-        </ul>
-      </section>
-    `).join('')}
-    <section class="byo-group byo-feature" aria-hidden="true">
-      <figure class="byo-figure">
-        <img src="images/byo.png" alt="Build-your-own toast ideas">
-        <figcaption>Build Your Own</figcaption>
-      </figure>
-    </section>
-  </div>`;
+// 2) Append the two BYO showcase image tiles (keeps the groups!)
+const byoShowcase = [
+  { src: 'images/byo.png',  alt: 'Two open-faced toasts with toppings', caption: 'Build your own' },
+  { src: 'images/byo2.png', alt: 'Bagel and toast with different toppings', caption: 'Endless combos' }
+];
 
-  // Drinks
-  document.getElementById('grid-drinks').innerHTML = menu.drinks.map(card).join('');
+const tilesHTML = byoShowcase.map(i => `
+  <section class="byo-group byo-feature">
+    <figure class="byo-figure">
+      <img src="${i.src}" alt="${i.alt}" loading="lazy">
+      <figcaption>${i.caption}</figcaption>
+    </figure>
+  </section>
+`).join('');
+
+buildEl.insertAdjacentHTML('beforeend', tilesHTML);
+
+  // DRINKS
+  $('#grid-drinks-hot').innerHTML  = (menu.drinks?.hot  || []).map(card).join('');
+  $('#grid-drinks-tea').innerHTML  = (menu.drinks?.tea  || []).map(card).join('');
+  $('#grid-drinks-cold').innerHTML = (menu.drinks?.cold || []).map(card).join('');
+
+  // default: Food extras
+  renderExtras('Extras', menu.food.extras);
+  // Make sure Extras is visible by default on initial load
+const aside = document.getElementById('menu-extras');
+if (aside) aside.style.display = 'block';
 })();
+ // ===== MENU RENDER: END =====
+
+
 
 // ===== Hide header on scroll down, show on scroll up =====
 (() => {

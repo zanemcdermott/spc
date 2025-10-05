@@ -543,3 +543,154 @@ html {
     ),
     radial-gradient(900px 420px at 12% 12%, rgba(199,179,122,.10), transparent 60%) !important;
 }
+
+/* Section headings inside the menu */
+.menusec{
+  font-size: 22px;
+  margin: 22px 0 12px;
+  letter-spacing:.02em;
+}
+
+/* Two-column layout (menu + aside) */
+.menu-layout{
+  display:grid;
+  grid-template-columns: 1fr 320px;
+  gap:22px;
+  align-items:start;
+}
+.menu-main{ min-width:0 }
+
+/* Extras bubble */
+.menu-extras{
+  position: sticky;
+  top: 96px;             /* sit below your sticky nav */
+  background: rgba(20,30,22,.40);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding:16px;
+  box-shadow: var(--shadow);
+}
+.menu-extras h3{
+  margin:.2em 0 .4em 0;
+}
+.menu-extras ul{
+  list-style:none; padding:0; margin:0;
+}
+.menu-extras li{
+  display:flex; justify-content:space-between; gap:14px;
+  padding:8px 0; border-top:1px solid rgba(255,255,255,.06);
+}
+.menu-extras li:first-child{ border-top:0 }
+.menu-extras .price{
+  font-weight:700; white-space:nowrap; font-variant-numeric: tabular-nums;
+}
+
+.grid.grid--single{ grid-template-columns: 1fr; }
+
+/* Responsive: extras under menu */
+@media (max-width: 980px){
+  .menu-layout{ grid-template-columns: 1fr; }
+  .menu-extras{ position:static; }
+}
+
+/* === Menu section headers === */
+.menusec{ font-size:22px; margin:22px 0 12px; letter-spacing:.02em }
+
+/* two-column layout: menu + extras */
+.menu-layout{
+  display:grid; grid-template-columns: 1fr 320px; gap:22px; align-items:start;
+}
+.menu-main{ min-width:0 }
+
+/* sticky extras bubble */
+.menu-extras{
+  position:sticky; top:96px;
+  background: rgba(20,30,22,.40);
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding:16px; box-shadow: var(--shadow);
+}
+.menu-extras h3{ margin:.2em 0 .4em 0 }
+.menu-extras ul{ list-style:none; margin:0; padding:0 }
+.menu-extras li{ display:flex; justify-content:space-between; padding:8px 0; border-top:1px solid rgba(255,255,255,.06) }
+.menu-extras li:first-child{ border-top:0 }
+.menu-extras .price{ font-weight:700; white-space:nowrap; font-variant-numeric: tabular-nums }
+
+.grid.grid--single{ grid-template-columns:1fr }
+
+/* wrap to single column on mobile */
+@media (max-width:980px){
+  .menu-layout{ grid-template-columns:1fr }
+  .menu-extras{ position:static }
+}
+
+/* ===== Menu headings inside the tabs ===== */
+.menusec{ font-size:22px; margin:22px 0 12px; letter-spacing:.02em }
+
+/* ===== Two-column menu + sticky aside ===== */
+.menu-layout{
+  display:grid; grid-template-columns:1fr 320px; gap:22px; align-items:start;
+}
+.menu-main{ min-width:0 }
+
+.menu-extras{
+  position:sticky; top:96px;
+  background:rgba(20,30,22,.40);
+  border:1px solid var(--line); border-radius:var(--radius);
+  padding:16px; box-shadow:var(--shadow);
+}
+.menu-extras h3{ margin:.2em 0 .4em 0 }
+.menu-extras ul{ list-style:none; padding:0; margin:0 }
+.menu-extras li{
+  display:flex; justify-content:space-between; gap:14px;
+  padding:8px 0; border-top:1px solid rgba(255,255,255,.06);
+}
+.menu-extras li:first-child{ border-top:0 }
+.menu-extras .price{ font-weight:700; white-space:nowrap; font-variant-numeric:tabular-nums }
+
+.grid.grid--single{ grid-template-columns:1fr }
+
+/* ===== BYO groups (compact list cards) ===== */
+.byogroups{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px }
+.byo-group{
+  background:linear-gradient(180deg,rgba(255,255,255,.02),transparent 30%), var(--bg-2);
+  border:1px solid var(--line); border-radius:var(--radius);
+  box-shadow:var(--shadow); overflow:hidden; height:100%;
+}
+.byo-group__head{ padding:14px 16px; border-bottom:1px solid var(--line) }
+.byo-group__head h3{ margin:0 }
+.byo-list{ list-style:none; margin:0; padding:6px 0 }
+.byo-item{
+  display:flex; justify-content:space-between; gap:16px;
+  padding:10px 16px; border-top:1px solid rgba(255,255,255,.04);
+}
+.byo-item:first-child{ border-top:0 }
+.byo-name{ color:var(--cream) }
+.byo-price{ color:var(--cream); font-weight:700 }
+
+@media (max-width:980px){
+  .menu-layout{ grid-template-columns:1fr }
+  .menu-extras{ position:static }
+  .byogroups{ grid-template-columns:repeat(2,1fr) }
+}
+@media (max-width:560px){
+  .byogroups{ grid-template-columns:1fr }
+}
+
+/* BYO showcase tile */
+.byo-feature{ padding:0; overflow:hidden }
+.byo-figure{
+  margin:0; position:relative;
+  aspect-ratio: 4 / 5;
+  width:100%;
+}
+.byo-figure img{
+  display:block; width:100%; height:100%; object-fit:cover;
+  filter: saturate(1.02) contrast(1.04);
+}
+.byo-figure figcaption{
+  position:absolute; left:12px; right:12px; bottom:12px;
+  background:rgba(33,47,34,.72); color:var(--cream);
+  padding:8px 10px; border-radius:10px; font-weight:700; letter-spacing:.02em;
+  text-align:center;
+}

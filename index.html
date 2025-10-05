@@ -77,38 +77,62 @@
   </figure>
 </div>
 
+<!-- ===== MENU: START (REPLACE THIS WHOLE BLOCK) ===== -->
+<section id="menu" class="menu-sections container">
 
-    <!-- ===== MENU (in-page) ===== -->
-<section id="menu" class="menu-sections">
-  <!-- your menu content -->
-</section>
-  <div class="container">
-    <h1>Menu</h1>
-    <p>Fresh, house-made and dialled for flavour. Build your own, or pick a favourite.</p>
+  <h1>Menu</h1>
+  <p class="muted">Fresh, house-made and dialled for flavour. Build your own, or pick a favourite.</p>
+
+  <!-- Tabs -->
+  <div class="tabs" role="tablist">
+    <button class="is-active" role="tab" aria-selected="true" data-tab="food">Food</button>
+    <button role="tab" aria-selected="false" data-tab="build">Build Your Own</button>
+    <button role="tab" aria-selected="false" data-tab="drinks">Drinks</button>
   </div>
-</section>
 
-<section class="menu-sections">
-  <div class="container">
-    <div class="tabs" role="tablist">
-      <button class="is-active" role="tab" aria-selected="true" data-tab="food">Food</button>
-      <button role="tab" aria-selected="false" data-tab="build">Build Your Own</button>
-      <button role="tab" aria-selected="false" data-tab="drinks">Drinks</button>
+  <!-- Two-column layout: menu + sticky extras -->
+  <div class="menu-layout">
+    <div class="menu-main">
+
+      <div class="tabpanes">
+        <!-- FOOD -->
+        <div id="pane-food" class="pane is-active">
+          <h2 class="menusec">Menu</h2>
+          <div id="grid-food-mains" class="grid"></div>
+
+          <h2 class="menusec">Eggs Your Way</h2>
+          <div id="grid-food-eggs" class="grid grid--single"></div>
+        </div>
+
+        <!-- BUILD -->
+        <div id="pane-build" class="pane">
+          <div class="byogroups" id="build-groups">
+            <!-- groups render here -->
+          </div>
+        </div>
+
+        <!-- DRINKS -->
+        <div id="pane-drinks" class="pane">
+          <h2 class="menusec">Hot Drinks</h2>
+          <div id="grid-drinks-hot" class="grid grid--drinks"></div>
+
+          <h2 class="menusec">Tea</h2>
+          <div id="grid-drinks-tea" class="grid grid--drinks"></div>
+
+          <h2 class="menusec">Cold Drinks</h2>
+          <div id="grid-drinks-cold" class="grid grid--drinks"></div>
+        </div>
+      </div>
+
     </div>
 
-    <div class="tabpanes">
-      <div id="pane-food" class="pane is-active">
-        <div id="grid-food" class="grid"></div>
-      </div>
-      <div id="pane-build" class="pane">
-        <div id="grid-build" class="grid"></div>
-      </div>
-      <div id="pane-drinks" class="pane">
-        <div id="grid-drinks" class="grid grid--drinks"></div>
-      </div>
-    </div>
+    <!-- Sticky extras bubble (auto switches Food/Drinks) -->
+    <aside id="menu-extras" class="menu-extras" aria-live="polite"></aside>
   </div>
 </section>
+<!-- ===== MENU: END ===== -->
+
+
 
   <!-- Visual band transition into Visit -->
 <section class="bench-section" data-parallax>
