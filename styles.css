@@ -533,3 +533,13 @@ html {
   .parallax-img{ transition: none !important; }
 }
 
+.hero.hero--visual::after{
+  background:
+    linear-gradient(90deg,
+      rgba(16,24,18,.65) 0%,
+      rgba(16,24,18,.48) 30%,
+      rgba(16,24,18,.22) 55%,
+      rgba(16,24,18,0) 80%
+    ),
+    radial-gradient(900px 420px at 12% 12%, rgba(199,179,122,.10), transparent 60%) !important;
+}
