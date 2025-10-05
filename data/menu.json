@@ -1,0 +1,74 @@
+{
+  "food": [
+    { "name": "SP Bahn Mi", "price": "15.9", "desc": "Pork or satay tofu, chilli mayo, fresh herbs, spring onion, pickled onions, pickled carrots, soy dressing.", "image": "images/placeholder-sando.jpg" },
+    { "name": "B'NE Toastie", "price": "16.9", "desc": "Bacon, free range eggs, Swiss, red cheddar, house BBQ sauce, pickles on toasted sourdough. +Avo $5, +Chilli oil $2.", "image": "images/placeholder-toastie.jpg" },
+    { "name": "BLAT", "price": "17.9", "desc": "Bacon, lettuce, avocado, tomato, cheese, mayo, relish.", "image": "images/placeholder-sando.jpg" },
+    { "name": "Kimcheese Toastie (V)", "price": "19.9", "desc": "Eddy + Wolf Kimchi, three cheese, chilli jam, spring onions on toasted sourdough. +Smoked ham $5.", "image": "images/placeholder-toastie.jpg" },
+    { "name": "Mushroom Toastie (V)", "price": "17.9", "desc": "Mixed medley, goats feta, chimichurri, truffle aioli, mozzarella on toasted sourdough.", "image": "images/placeholder-toastie.jpg" },
+    { "name": "Chicken Sando (GFO)", "price": "17.9", "desc": "Chicken, avocado, zuni pickles, toasted almonds, cos, dill mayo. +Chilli oil $2.", "image": "images/placeholder-sando.jpg" },
+    { "name": "Deli Sando (GFO)", "price": "19.9", "desc": "Smoked ham, mortadella, salami, tomato, zuni pickles, mayo, chilli jam, Swiss, lettuce on fresh deli roll.", "image": "images/placeholder-sando.jpg" },
+    { "name": "Overnight Oats (V)", "price": "15.9", "desc": "Oats, apple, coco, house granola, berries, raspberry gel.", "image": "images/placeholder-oats.jpg" },
+    { "name": "Ham + Double Cheese Toastie / Croissant (GFO)", "price": "12.9", "desc": "Ham, double cheese, tomato relish.", "image": "images/placeholder-toastie.jpg" },
+    { "name": "Peach + Nduja Tartine", "price": "18.9", "desc": "Grilled peach, stracciatella, basil, sesame, radish, sherry dressing on toasted sourdough.", "image": "images/placeholder-toastie.jpg" },
+    { "name": "Avo Toast (V)", "price": "16.9", "desc": "Avocado & goats feta, salsa verde, edamame, house pickles, fried onions on toasted sourdough. +Bacon, +2 eggs (boiled/fried).", "image": "images/placeholder-toastie.jpg" },
+    { "name": "SP Fruit Salad", "price": "17.9", "desc": "Seasonal fruit, citrus dressing, chia, coco, house granola.", "image": "images/placeholder-generic.jpg" },
+    { "name": "Salmon Bagel", "price": "19.9", "desc": "NZ smoked salmon, herby lemon cream cheese, fresh onion, fried capers on a house bagel.", "image": "images/placeholder-bagel.jpg" },
+    { "name": "Nduja Chilli Scrambled Eggs", "price": "20.9", "desc": "Nduja chilli, scrambled eggs, chimichurri, Swiss, goats feta, cress, soft herbs on toasted sourdough.", "image": "images/placeholder-toastie.jpg" },
+    { "name": "Chicken Sandwich", "price": "18.9", "desc": "Poached chicken, Swiss, lettuce, pickled jalapeños on soft loaf.", "image": "images/placeholder-sando.jpg" },
+    { "name": "Salad Sandwich (V)", "price": "15.9", "desc": "Preservation — aïoli, Swiss, lettuce, rocket, zuni pickles, avo, tomato, sprouts on soft loaf.", "image": "images/placeholder-sando.jpg" },
+    { "name": "Beef Sandwich", "price": "19.9", "desc": "Rare roast beef, Swiss, pickles, horseradish on soft loaf.", "image": "images/placeholder-sando.jpg" }
+  ],
+
+  "build": [
+  { "name": "Toast — 1 slice", "price": "5", "group": "Base", "image": "images/placeholder-toastie.jpg" },
+  { "name": "Toast — 2 slices", "price": "7", "group": "Base", "image": "images/placeholder-toastie.jpg" },
+
+  { "name": "Boiled egg", "price": "3", "group": "Protein", "image": "images/placeholder-generic.jpg" },
+  { "name": "Two boiled eggs", "price": "5", "group": "Protein", "image": "images/placeholder-generic.jpg" },
+  { "name": "Scrambled eggs", "price": "7", "group": "Protein", "image": "images/placeholder-generic.jpg" },
+  { "name": "Smoked salmon", "price": "8", "group": "Protein", "image": "images/placeholder-bagel.jpg" },
+  { "name": "Mortadella", "price": "6", "group": "Protein", "image": "images/placeholder-sando.jpg" },
+  { "name": "Smoked ham", "price": "5", "group": "Protein", "image": "images/placeholder-sando.jpg" },
+
+  { "name": "Halloumi", "price": "6", "group": "Cheese", "image": "images/placeholder-generic.jpg" },
+  { "name": "Goats feta", "price": "4", "group": "Cheese", "image": "images/placeholder-generic.jpg" },
+
+  { "name": "Semi roasted tomatoes", "price": "3", "group": "Veg", "image": "images/placeholder-generic.jpg" },
+  { "name": "Fresh tomato", "price": "3", "group": "Veg", "image": "images/placeholder-generic.jpg" },
+  { "name": "Avocado", "price": "5", "group": "Veg", "image": "images/placeholder-generic.jpg" },
+  { "name": "Pickles", "price": "3", "group": "Veg", "image": "images/placeholder-generic.jpg" },
+
+  { "name": "Jam", "price": "3", "group": "Spreads", "image": "images/placeholder-generic.jpg" },
+  { "name": "Vegemite", "price": "2", "group": "Spreads", "image": "images/placeholder-generic.jpg" },
+  { "name": "Peanut butter", "price": "2", "group": "Spreads", "image": "images/placeholder-generic.jpg" },
+  { "name": "Relish", "price": "2", "group": "Spreads", "image": "images/placeholder-generic.jpg" },
+  { "name": "Chimichurri", "price": "2", "group": "Spreads", "image": "images/placeholder-generic.jpg" },
+  { "name": "Chilli oil", "price": "2", "group": "Spreads", "image": "images/placeholder-generic.jpg" },
+  { "name": "Brown sauce", "price": "2", "group": "Spreads", "image": "images/placeholder-generic.jpg" }
+],
+
+
+  "drinks": [
+    { "name": "Coffee (Small)", "price": "5", "desc": "Latte, mocha, filter, hot choc, matcha.", "image": "images/placeholder-latte.jpg" },
+    { "name": "Coffee (Large)", "price": "6", "desc": "Latte, mocha, filter, hot choc, matcha.", "image": "images/placeholder-latte.jpg" },
+    { "name": "Premium Hot Chocolate (S)", "price": "6", "desc": "", "image": "images/placeholder-generic.jpg" },
+    { "name": "Premium Hot Chocolate (L)", "price": "7", "desc": "", "image": "images/placeholder-generic.jpg" },
+
+    { "name": "Extra shot", "price": "0.5", "desc": "Add-on", "image": "images/placeholder-generic.jpg" },
+    { "name": "Syrups", "price": "0.5", "desc": "Add-on", "image": "images/placeholder-generic.jpg" },
+    { "name": "Honey", "price": "0.5", "desc": "Add-on", "image": "images/placeholder-generic.jpg" },
+    { "name": "Alternative milk", "price": "1", "desc": "Add-on", "image": "images/placeholder-generic.jpg" },
+
+    { "name": "Tea", "price": "6", "desc": "English Breakfast, Earl Grey, Jasmine Green, Lemongrass Ginger, Peppermint.", "image": "images/placeholder-generic.jpg" },
+
+    { "name": "Iced Latte", "price": "6", "desc": "", "image": "images/placeholder-latte.jpg" },
+    { "name": "Iced Black", "price": "6", "desc": "", "image": "images/placeholder-generic.jpg" },
+    { "name": "Iced Mocha", "price": "6", "desc": "", "image": "images/placeholder-generic.jpg" },
+
+    { "name": "Milo Milkshake", "price": "9", "desc": "", "image": "images/placeholder-generic.jpg" },
+    { "name": "Mango Smoothie", "price": "9", "desc": "", "image": "images/placeholder-generic.jpg" },
+    { "name": "Seasonal Housemade Soda", "price": "10", "desc": "", "image": "images/placeholder-generic.jpg" },
+
+    { "name": "Orange / Apple Juice", "price": "6", "desc": "", "image": "images/placeholder-generic.jpg" }
+  ]
+}

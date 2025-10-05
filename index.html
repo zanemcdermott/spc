@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Side Piece Coffee</title>
+  <meta name="description" content="Side Piece Coffee — good coffee, good food, good dogs." />
+  <link rel="stylesheet" href="styles.css?v=2">
+</head>
+<body>
+  <header class="nav">
+    <div class="container nav__row">
+      <a class="brand" href="./">
+        <img src="images/logo.png" alt="Side Piece Coffee" class="brand__logo"/>
+        <span class="brand__text">Side Piece Coffee</span>
+      </a>
+      <nav class="nav__links">
+        <a href="./menu.html">Menu</a>
+        <a href="#visit">Visit</a>
+        <a class="btn btn--cream" href="./menu.html#order">Order</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO — Visual WOW -->
+<section class="hero hero--visual">
+  <!-- Background image (outside.png) -->
+  <div class="hero__bg" role="img"
+       aria-label="Side Piece Coffee outdoor seating with logo on window"></div>
+
+  <div class="container hero__grid">
+    <div class="hero__copy">
+      <h1>All the best.</h1>
+      <p>Dialled-in coffee, stacked sandos, and a place your dog is actually welcome.</p>
+      <div class="hero__actions">
+        <a class="btn btn--cream" href="./menu.html">See Menu</a>
+        <a class="btn btn--ghost" href="#visit">Visit Us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section class="features">
+      <div class="container features__grid">
+        <article class="card">
+          <div class="card__icon">🐶</div>
+          <h3>Dog-friendly</h3>
+          <p>Water bowls, pats, and snacks. Bring your goodest mate.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">🥪</div>
+          <h3>House-made</h3>
+          <p>From chilli oil to relishes — made in house, served fresh.</p>
+        </article>
+        <article class="card">
+          <div class="card__icon">☕</div>
+          <h3>Proper coffee</h3>
+          <p>Small or large, alt milks, extra shots — the works.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="visit" class="visit">
+      <div class="container visit__grid">
+        <div>
+          <h2>Visit</h2>
+          <ul class="list">
+            <li><strong>Address:</strong> <span id="addr">2 Capital Ct, Varsity Lakes QLD 4227</span></li>
+            <li><strong>Hours:</strong> <span id="hours">6am-2pm Everyday</span></li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn--cream" href="./menu.html">Menu</a>
+            <a class="btn btn--ghost" href="./menu.html#order">Order</a>
+          </div>
+        </div>
+        <div class="visit__map">
+<div class="map-wrap">
+  <iframe
+    class="map-frame"
+    src="https://www.google.com/maps?q=2%20Capital%20Ct%2C%20Varsity%20Lakes%20QLD%204227&output=embed"
+    loading="lazy"
+    referrerpolicy="no-referrer-when-downgrade"
+    allowfullscreen
+    aria-label="Map to Side Piece Coffee, 2 Capital Ct, Varsity Lakes QLD 4227">
+  </iframe>
+
+  <a class="btn btn--cream map-directions"
+     href="https://www.google.com/maps/dir/?api=1&destination=2+Capital+Ct,+Varsity+Lakes+QLD+4227"
+     target="_blank" rel="noopener">
+    Get Directions
+  </a>
+</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__row">
+      <span>© <span id="year"></span> Side Piece Coffee</span>
+      <a href="./menu.html" class="btn btn--ghost">Menu</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
