@@ -6,15 +6,17 @@
   <title>Side Piece Coffee</title>
   <meta name="description" content="Side Piece Coffee — good coffee, good food, good dogs." />
   <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="icon" href="images/favicon.png">
+  <meta name="theme-color" content="#212f22">
 </head>
 <body>
   <header class="nav">
     <div class="container nav__row">
-      <a class="brand" href="./">
-        <img src="images/logo.png" alt="Side Piece Coffee" class="brand__logo"/>
+      <a class="brand" href="./" aria-label="Side Piece Coffee — home">
+        <img src="images/logo.png" alt="Side Piece Coffee logo" class="brand__logo"/>
         <span class="brand__text">Side Piece Coffee</span>
       </a>
-      <nav class="nav__links">
+      <nav class="nav__links" aria-label="Primary">
         <a href="#menu">Menu</a>
         <a href="#visit">Visit</a>
         <a class="btn btn--cream" href="./menu.html#order">Order</a>
@@ -24,128 +26,119 @@
 
   <main>
     <!-- HERO — Visual WOW -->
-<section class="hero hero--visual">
-  <!-- Background image (outside.png) -->
-  <div class="hero__bg" role="img"
-       aria-label="Side Piece Coffee outdoor seating with logo on window"></div>
+    <section class="hero hero--visual">
+      <!-- Background image (outside.png) -->
+      <div class="hero__bg" role="img"
+           aria-label="Side Piece Coffee outdoor seating with logo on window"></div>
 
-  <div class="container hero__grid">
-    <div class="hero__copy">
-      <h1>All the best.</h1>
-      <p>Dialled-in coffee, stacked sandos, and a place your dog is actually welcome.</p>
-      <div class="hero__actions">
-<a href="#menu" class="btn btn--cream">See Menu</a>
-        <a class="btn btn--ghost" href="#visit">Visit Us</a>
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <h1>All the best.</h1>
+          <p>Dialled-in coffee, stacked sandos, and a place your dog is actually welcome.</p>
+          <div class="hero__actions">
+            <a href="#menu" class="btn btn--cream">See Menu</a>
+            <a class="btn btn--ghost" href="#visit">Visit Us</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <section class="features">
       <div class="container features__grid">
         <article class="card">
-          <div class="card__icon">🐶</div>
+          <div class="card__icon" aria-hidden="true">🐶</div>
           <h3>Dog-friendly</h3>
           <p>Water bowls, pats, and snacks. Bring your goodest mate.</p>
         </article>
         <article class="card">
-          <div class="card__icon">🥪</div>
+          <div class="card__icon" aria-hidden="true">🥪</div>
           <h3>House-made</h3>
           <p>From chilli oil to relishes — made in house, served fresh.</p>
         </article>
         <article class="card">
-          <div class="card__icon">☕</div>
+          <div class="card__icon" aria-hidden="true">☕</div>
           <h3>Proper coffee</h3>
           <p>Small or large, alt milks, extra shots — the works.</p>
         </article>
       </div>
     </section>
 
-<!-- Feature split: food visual -->
-<div class="feature-split">
-  <div class="feature-split__text">
-    <h2>Food you actually want to eat.</h2>
-    <p class="muted">House-made fillings, toasted right, and dialled-in flavours. Try a sando, tartine, or build your own.</p>
-    <div class="cta-row">
-      <a class="btn btn--cream" href="#menu">Browse Menu</a>
-      <a class="btn btn--ghost" href="#pane-build">Build Your Own</a>
-    </div>
-  </div>
-
-  <figure class="feature-split__media">
-    <img src="images/spcfood.png" alt="Side Piece Coffee food spread" loading="lazy">
-  </figure>
-</div>
-
-<!-- ===== MENU: START (REPLACE THIS WHOLE BLOCK) ===== -->
-<section id="menu" class="menu-sections container">
-
-  <h1>Menu</h1>
-  <p class="muted">Fresh, house-made and dialled for flavour. Build your own, or pick a favourite.</p>
-
-  <!-- Tabs -->
-  <div class="tabs" role="tablist">
-    <button class="is-active" role="tab" aria-selected="true" data-tab="food">Food</button>
-    <button role="tab" aria-selected="false" data-tab="build">Build Your Own</button>
-    <button role="tab" aria-selected="false" data-tab="drinks">Drinks</button>
-  </div>
-
-  <!-- Two-column layout: menu + sticky extras -->
-  <div class="menu-layout">
-    <div class="menu-main">
-
-      <div class="tabpanes">
-        <!-- FOOD -->
-        <div id="pane-food" class="pane is-active">
-          <h2 class="menusec">Menu</h2>
-          <div id="grid-food-mains" class="grid"></div>
-
-          <h2 class="menusec">Eggs Your Way</h2>
-          <div id="grid-food-eggs" class="grid grid--single"></div>
-        </div>
-
-        <!-- BUILD -->
-        <div id="pane-build" class="pane">
-          <div class="byogroups" id="build-groups">
-            <!-- groups render here -->
-          </div>
-        </div>
-
-        <!-- DRINKS -->
-        <div id="pane-drinks" class="pane">
-          <h2 class="menusec">Hot Drinks</h2>
-          <div id="grid-drinks-hot" class="grid grid--drinks"></div>
-
-          <h2 class="menusec">Tea</h2>
-          <div id="grid-drinks-tea" class="grid grid--drinks"></div>
-
-          <h2 class="menusec">Cold Drinks</h2>
-          <div id="grid-drinks-cold" class="grid grid--drinks"></div>
+    <!-- Feature split: food visual -->
+    <div class="feature-split">
+      <div class="feature-split__text">
+        <h2>Food you actually want to eat.</h2>
+        <p class="muted">House-made fillings, toasted right, and dialled-in flavours. Try a sando, tartine, or build your own.</p>
+        <div class="cta-row">
+          <a class="btn btn--cream" href="#menu">Browse Menu</a>
+          <a class="btn btn--ghost" href="#pane-build">Build Your Own</a>
         </div>
       </div>
 
+      <figure class="feature-split__media">
+        <img src="images/spcfood.png" alt="Side Piece Coffee food spread" loading="lazy" width="1200" height="800">
+      </figure>
     </div>
 
-    <!-- Sticky extras bubble (auto switches Food/Drinks) -->
-    <aside id="menu-extras" class="menu-extras" aria-live="polite"></aside>
-  </div>
-</section>
-<!-- ===== MENU: END ===== -->
+    <!-- ===== MENU ===== -->
+    <section id="menu" class="menu-sections container">
+      <h1>Menu</h1>
+      <p class="muted">Fresh, house-made and dialled for flavour. Build your own, or pick a favourite.</p>
 
+      <!-- Tabs -->
+      <div class="tabs" role="tablist" aria-label="Menu categories">
+        <button class="is-active" role="tab" aria-selected="true" data-tab="food" id="tab-food" aria-controls="pane-food">Food</button>
+        <button role="tab" aria-selected="false" data-tab="build" id="tab-build" aria-controls="pane-build">Build Your Own</button>
+        <button role="tab" aria-selected="false" data-tab="drinks" id="tab-drinks" aria-controls="pane-drinks">Drinks</button>
+      </div>
 
+      <!-- Two-column layout: menu + sticky extras -->
+      <div class="menu-layout">
+        <div class="menu-main">
+          <div class="tabpanes">
+            <!-- FOOD -->
+            <div id="pane-food" class="pane is-active" role="tabpanel" aria-labelledby="tab-food">
+              <h2 class="menusec">Menu</h2>
+              <div id="grid-food-mains" class="grid"></div>
 
-  <!-- Visual band transition into Visit -->
-<section class="bench-section" data-parallax>
-  <div class="bench-media">
-    <img class="parallax-img" src="images/bench.png" alt="Bench seating with latte">
-  </div>
-  <!-- optional overlay text; delete if you want it purely visual -->
-  <div class="bench-caption">
-    <h3>See you soon.</h3>
-  </div>
-</section>
+              <h2 class="menusec">Eggs Your Way</h2>
+              <div id="grid-food-eggs" class="grid grid--single"></div>
+            </div>
 
-  
+            <!-- BUILD -->
+            <div id="pane-build" class="pane" role="tabpanel" aria-labelledby="tab-build" hidden>
+              <div class="byogroups" id="build-groups">
+                <!-- groups render here -->
+              </div>
+            </div>
+
+            <!-- DRINKS -->
+            <div id="pane-drinks" class="pane" role="tabpanel" aria-labelledby="tab-drinks" hidden>
+              <h2 class="menusec">Hot Drinks</h2>
+              <div id="grid-drinks-hot" class="grid grid--drinks"></div>
+
+              <h2 class="menusec">Tea</h2>
+              <div id="grid-drinks-tea" class="grid grid--drinks"></div>
+
+              <h2 class="menusec">Cold Drinks</h2>
+              <div id="grid-drinks-cold" class="grid grid--drinks"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky extras bubble (auto switches Food/Drinks) -->
+        <aside id="menu-extras" class="menu-extras" aria-live="polite"></aside>
+      </div>
+    </section>
+
+    <!-- Visual band transition into Visit -->
+    <section class="bench-section" data-parallax>
+      <div class="bench-media">
+        <img class="parallax-img" src="images/bench.png" alt="Bench seating with latte" width="1600" height="600" loading="lazy">
+      </div>
+      <div class="bench-caption">
+        <h3>See you soon.</h3>
+      </div>
+    </section>
 
     <section id="visit" class="visit">
       <div class="container visit__grid">
@@ -153,72 +146,71 @@
           <h2>Visit</h2>
           <ul class="list">
             <li><strong>Address:</strong> <span id="addr">2 Capital Ct, Varsity Lakes QLD 4227</span></li>
-            <li><strong>Hours:</strong> <span id="hours">6am-2pm Everyday</span></li>
+            <li><strong>Hours:</strong> <span id="hours">6am–2pm everyday</span></li>
           </ul>
           <div class="cta-row">
             <a class="btn btn--cream" href="./menu.html">Menu</a>
             <a class="btn btn--ghost" href="./menu.html#order">Order</a>
           </div>
         </div>
-        <div class="visit__map">
-<div class="map-wrap">
-  <iframe
-    class="map-frame"
-    src="https://www.google.com/maps?q=2%20Capital%20Ct%2C%20Varsity%20Lakes%20QLD%204227&output=embed"
-    loading="lazy"
-    referrerpolicy="no-referrer-when-downgrade"
-    allowfullscreen
-    aria-label="Map to Side Piece Coffee, 2 Capital Ct, Varsity Lakes QLD 4227">
-  </iframe>
 
-  <a class="btn btn--cream map-directions"
-     href="https://www.google.com/maps/dir/?api=1&destination=2+Capital+Ct,+Varsity+Lakes+QLD+4227"
-     target="_blank" rel="noopener">
-    Get Directions
-  </a>
-</div>
+        <div class="visit__map">
+          <div class="map-wrap">
+            <iframe
+              class="map-frame"
+              src="https://www.google.com/maps?q=2%20Capital%20Ct%2C%20Varsity%20Lakes%20QLD%204227&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              allowfullscreen
+              aria-label="Map to Side Piece Coffee, 2 Capital Ct, Varsity Lakes QLD 4227">
+            </iframe>
+
+            <a class="btn btn--cream map-directions"
+               href="https://www.google.com/maps/dir/?api=1&destination=2+Capital+Ct,+Varsity+Lakes+QLD+4227"
+               target="_blank" rel="noopener">
+              Get Directions
+            </a>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-  <div class="container footer__grid" role="contentinfo">
-    <!-- Brand / blurb -->
-    <div class="footer__brand">
-      <a class="brand" href="#top" aria-label="Side Piece Coffee — back to top">
-        <img src="images/logo.png" class="brand__logo" alt="">
-        <span class="brand__text">Side Piece Coffee</span>
-      </a>
-      <p class="muted">Dialled-in coffee, stacked sandos, and your dog is actually welcome.</p>
+    <div class="container footer__grid" role="contentinfo">
+      <!-- Brand / blurb -->
+      <div class="footer__brand">
+        <a class="brand" href="#top" aria-label="Side Piece Coffee — back to top">
+          <img src="images/logo.png" class="brand__logo" alt="Side Piece Coffee logo">
+          <span class="brand__text">Side Piece Coffee</span>
+        </a>
+        <p class="muted">Dialled-in coffee, stacked sandos, and your dog is actually welcome.</p>
 
-      <div class="social">
-        <a class="social__btn" href="https://www.instagram.com/sidepiece.coffee/" target="_blank" rel="noopener" aria-label="Instagram">
-          <!-- Instagram SVG -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 16.8 2.8 2.8 0 0 0 12 9.2zM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
-        </a>
-        <a class="social__btn" href="https://www.google.com/maps/place/2+Capital+Ct,+Varsity+Lakes+QLD+4227" target="_blank" rel="noopener" aria-label="Google Maps">
-          <!-- Map pin SVG -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
-        </a>
-        <a class="social__btn" href="mailto:hello@sidepiece.coffee" aria-label="Email">
-          <!-- Mail SVG -->
-          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
-        </a>
+        <div class="social">
+          <a class="social__btn" href="https://www.instagram.com/sidepiece.coffee/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm10 2H7a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3zm-5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2.2A2.8 2.8 0 1 0 12 16.8 2.8 2.8 0 0 0 12 9.2zM17.5 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/></svg>
+          </a>
+          <a class="social__btn" href="https://www.google.com/maps/place/2+Capital+Ct,+Varsity+Lakes+QLD+4227" target="_blank" rel="noopener" aria-label="Google Maps">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z"/></svg>
+          </a>
+          <a class="social__btn" href="mailto:hello@sidepiece.coffee" aria-label="Email">
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+          </a>
+        </div>
       </div>
-    </div>
 
-    <!-- Visit -->
-    <div class="footer__col">
-      <h4 class="footer__heading">Visit</h4>
-      <ul class="footer__list">
-        <li><strong>Address:</strong> 2 Capital Ct, Varsity Lakes QLD 4227</li>
-        <li><strong>Hours:</strong> Mon–Sun 6am–2pm</li>
-        <li><strong>Dog-friendly:</strong> Water bowls & treats</li>
-      </ul>
-      <div class="footer__cta">
-        <a class="btn btn--cream" href="#menu">Menu</a>
-        <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&destination=2+Capital+Ct,+Varsity+Lakes+QLD+4227" target="_blank" rel="noopener">Directions</a>
+      <!-- Visit -->
+      <div class="footer__col">
+        <h4 class="footer__heading">Visit</h4>
+        <ul class="footer__list">
+          <li><strong>Address:</strong> 2 Capital Ct, Varsity Lakes QLD 4227</li>
+          <li><strong>Hours:</strong> Mon–Sun 6am–2pm</li>
+          <li><strong>Dog-friendly:</strong> Water bowls &amp; treats</li>
+        </ul>
+        <div class="footer__cta">
+          <a class="btn btn--cream" href="#menu">Menu</a>
+          <a class="btn btn--ghost" href="https://www.google.com/maps/dir/?api=1&destination=2+Capital+Ct,+Varsity+Lakes+QLD+4227" target="_blank" rel="noopener">Directions</a>
+        </div>
       </div>
     </div>
   </footer>
@@ -227,18 +219,13 @@
     <div class="container footer__bottom__row">
       <small>© <span id="year"></span> Side Piece Coffee</small>
       <small class="muted">
-        Site by <a class="credit" href="zanemcdermott.github.io/hello-static" target="_blank" rel="noopener">Sidekick Sites</a>
+        Site by <a class="credit" href="https://zanemcdermott.github.io/hello-static" target="_blank" rel="noopener">Sidekick Sites</a>
       </small>
     </div>
   </div>
-</footer>
-
-<script>
-  // current year in the credit line
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
 
   <script>
+    // current year in the credit line
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
   <script src="app.js" defer></script>
