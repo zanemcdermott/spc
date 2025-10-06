@@ -189,6 +189,15 @@ const byoGroup = (group) => `
   </section>
 `;
 
+const renderByoShowcase = (item) => `
+  <button type="button" class="byo-group byo-feature" data-build-start>
+    <figure class="byo-figure">
+      <img src="${item.src}" alt="${item.alt}" loading="lazy">
+      <figcaption>${item.caption}</figcaption>
+    </figure>
+  </button>
+`;
+
 /* ---------- Menu extras sidebar ---------- */
 const renderExtras = (title, items) => {
   const aside = $('#menu-extras');
@@ -750,21 +759,13 @@ const renderBuild = (groups) => {
     </section>
   `;
   const groupsHtml = (groups || []).map(byoGroup).join('');
-  container.innerHTML = cta + groupsHtml;
-
-  // Showcase tiles remain
   const showcase = [
     { src: 'images/byo.png',  alt: 'Two open-faced toasts with toppings', caption: 'Build your own' },
     { src: 'images/byo2.png', alt: 'Bagel and toast with different toppings', caption: 'Endless combos' },
   ];
-  container.insertAdjacentHTML('beforeend', showcase.map((item) => `
-    <section class="byo-group byo-feature">
-      <figure class="byo-figure">
-        <img src="${item.src}" alt="${item.alt}" loading="lazy">
-        <figcaption>${item.caption}</figcaption>
-      </figure>
-    </section>
-  `).join(''));
+  const firstShowcase = showcase[0] ? renderByoShowcase(showcase[0]) : '';
+  const trailingShowcase = showcase.slice(1).map(renderByoShowcase).join('');
+  container.innerHTML = firstShowcase + cta + groupsHtml + trailingShowcase;
 };
 
 /* ---------- Tabs ---------- */
