@@ -9,17 +9,23 @@
   <link rel="icon" href="images/favicon.png">
   <meta name="theme-color" content="#212f22">
 </head>
-<body>
+<body id="top">
   <header class="nav">
     <div class="container nav__row">
       <a class="brand" href="./" aria-label="Side Piece Coffee — home">
         <img src="images/logo.png" alt="Side Piece Coffee logo" class="brand__logo"/>
         <span class="brand__text">Side Piece Coffee</span>
       </a>
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#menu">Menu</a>
-        <a href="#visit">Visit</a>
-      </nav>
+      <div class="nav__actions">
+        <nav class="nav__links" aria-label="Primary">
+          <a href="#menu">Menu</a>
+          <a href="#visit">Visit</a>
+        </nav>
+        <button type="button" class="cart-toggle" id="cart-toggle" aria-haspopup="dialog" aria-controls="cart-drawer">
+          <span class="cart-toggle__label">Cart</span>
+          <span class="cart-toggle__count" id="cart-count">0</span>
+        </button>
+      </div>
     </div>
   </header>
 
@@ -148,8 +154,8 @@
             <li><strong>Hours:</strong> <span id="hours">6am–2pm everyday</span></li>
           </ul>
           <div class="cta-row">
-            <a class="btn btn--cream" href="./menu.html">Menu</a>
-            <a class="btn btn--ghost" href="./menu.html#order">Order</a>
+            <a class="btn btn--cream" href="#menu">Menu</a>
+            <a class="btn btn--ghost" href="#menu">Order</a>
           </div>
         </div>
 
@@ -222,6 +228,37 @@
       </small>
     </div>
   </div>
+
+  <div id="overlay" class="overlay" hidden></div>
+
+  <div id="item-modal" class="item-modal" role="dialog" aria-modal="true" aria-labelledby="item-modal-title" hidden>
+    <div class="item-modal__inner">
+      <header class="item-modal__header">
+        <h2 id="item-modal-title"></h2>
+        <button type="button" class="item-modal__close" data-item-close aria-label="Close item">Close</button>
+      </header>
+      <div class="item-modal__body" id="item-modal-body"></div>
+    </div>
+  </div>
+
+  <aside id="cart-drawer" class="cart-drawer" role="dialog" aria-labelledby="cart-drawer-title" hidden>
+    <div class="cart-drawer__inner">
+      <header class="cart-drawer__header">
+        <h2 id="cart-drawer-title">Your Order</h2>
+        <button type="button" class="cart-drawer__close" data-cart-close aria-label="Close cart">Close</button>
+      </header>
+      <div class="cart-drawer__body" id="cart-items"></div>
+      <footer class="cart-drawer__footer">
+        <div class="cart-total">
+          <span>Total</span>
+          <span id="cart-total">$0</span>
+        </div>
+        <button type="button" class="btn btn--ghost cart-more" id="cart-more">Order more</button>
+        <button type="button" class="btn btn--cream cart-checkout" id="cart-checkout">Checkout</button>
+        <p class="muted cart-note">Online ordering coming soon.</p>
+      </footer>
+    </div>
+  </aside>
 
   <script>
     // current year in the credit line

@@ -1,23 +1,23 @@
 {
   "food": {
     "mains": [
-      { "name": "B’N’E Toastie", "price": 17.9, "desc": "Bacon, free-range eggs, Swiss, red cheddar, house BBQ sauce + pickles on toasted sourdough", "options": [ { "name": "+ Avo", "price": 5 }, { "name": "+ Chilli oil", "price": 3 } ] },
+      { "name": "B’N’E Toastie", "price": 17.9, "desc": "Bacon, free-range eggs, Swiss, red cheddar, house BBQ sauce + pickles on toasted sourdough", "options": [ { "name": "+ Avo", "price": 5, "popular": true }, { "name": "+ Chilli oil", "price": 3, "popular": true } ] },
       { "name": "Peach + ’Nduja Tartine", "price": 18.9, "desc": "Grilled peach, stracciatella, basil, sesame, radish, sherry dressing on toasted sourdough" },
-      { "name": "Avo Toast (V)", "price": 16.9, "desc": "Avocado, goats feta, salsa verde, edamame, house pickles & fried onions on toasted sourdough", "options": [ { "name": "+ Bacon", "price": 7 }, { "name": "+ 2 boiled or fried eggs", "price": 5 } ] },
+      { "name": "Avo Toast (V)", "price": 16.9, "desc": "Avocado, goats feta, salsa verde, edamame, house pickles & fried onions on toasted sourdough", "options": [ { "name": "+ Bacon", "price": 7, "popular": true }, { "name": "+ 2 boiled or fried eggs", "price": 5, "popular": true } ] },
       { "name": "SP Fruit Salad", "price": 17.9, "desc": "Summer fruits • citrus dressing • chia • coco • house granola" },
       { "name": "Salmon Bagel", "price": 19.9, "desc": "NZ smoked salmon • herby lemon cream cheese • rocket • pickled onions • fried capers on a house-baked bagel" },
       { "name": "’Nduja Chilli Scrambled Eggs", "price": 20.9, "desc": "’Nduja chilli scrambled eggs • gruyère • goats feta • watercress & soft herbs on toasted croissant" },
       { "name": "Chicken Sandwich", "price": 18.9, "desc": "Poached chicken • Swiss • lettuce • pickled jalapeños on scotch loaf" },
-      { "name": "Salad Sandwich (V)", "price": 15.9, "desc": "Beetroot relish • salad • Swiss • pickles • rocket • cos • radicchio • avo • tomato • sprouts on scotch loaf", "options": [ { "name": "+ Smoked ham", "price": 5 }, { "name": "+ Chicken", "price": 6 } ] },
+      { "name": "Salad Sandwich (V)", "price": 15.9, "desc": "Beetroot relish • salad • Swiss • pickles • rocket • cos • radicchio • avo • tomato • sprouts on scotch loaf", "options": [ { "name": "+ Smoked ham", "price": 5, "popular": true }, { "name": "+ Chicken", "price": 6, "popular": true } ] },
       { "name": "Beef Sandwich", "price": 19.9, "desc": "Rare roast beef • provolone • rocket • zucchini pickles • horseradish on scotch loaf" },
       { "name": "Ham + Double Cheese", "price": 14.9, "desc": "Smoked ham • provolone • mozzarella • tomato relish on toasted sourdough or croissant" }
     ],
     "eggs": { "name": "Eggs Your Way", "price": 13.9, "desc": "Your choice of fried, scrambled or boiled eggs on sourdough / house baked bagel", "gfOption": 3.5 },
     "extras": [
-      { "name": "Bacon", "price": 7 }, { "name": "Poached chicken", "price": 6 }, { "name": "Smoked ham", "price": 5 }, { "name": "Smoked salmon", "price": 8 },
-      { "name": "Avocado", "price": 5 }, { "name": "Semi roasted tomatoes", "price": 5 }, { "name": "Halloumi", "price": 6 }, { "name": "Goats feta", "price": 4 },
+      { "name": "Bacon", "price": 7, "popular": true }, { "name": "Poached chicken", "price": 6 }, { "name": "Smoked ham", "price": 5 }, { "name": "Smoked salmon", "price": 8, "popular": true },
+      { "name": "Avocado", "price": 5, "popular": true }, { "name": "Semi roasted tomatoes", "price": 5 }, { "name": "Halloumi", "price": 6, "popular": true }, { "name": "Goats feta", "price": 4 },
       { "name": "Pickles", "price": 3 }, { "name": "Fresh tomatoes", "price": 4 },
-      { "name": "Tomato relish", "price": 3 }, { "name": "SP chilli oil", "price": 3 }, { "name": "House brown sauce", "price": 3 }, { "name": "Jam", "price": 3 }, { "name": "Vegemite", "price": 2 }, { "name": "Peanut butter", "price": 2 }, { "name": "Herby lemon cream cheese", "price": 3 }
+      { "name": "Tomato relish", "price": 3 }, { "name": "SP chilli oil", "price": 3, "popular": true }, { "name": "House brown sauce", "price": 3 }, { "name": "Jam", "price": 3 }, { "name": "Vegemite", "price": 2 }, { "name": "Peanut butter", "price": 2 }, { "name": "Herby lemon cream cheese", "price": 3 }
     ]
   },
 
@@ -45,7 +45,7 @@
       { "name": "Iced Strawberry Matcha", "price": 9 }, { "name": "Milo Milkshake", "price": 9 }, { "name": "Summer Smoothie", "price": 10 }
     ],
     "extras": [
-      { "name": "Extra shot", "price": 0.5 }, { "name": "Syrups", "price": 0.5 }, { "name": "Honey", "price": 0.5 }, { "name": "Alternative milk", "price": 1 }
+      { "name": "Extra shot", "price": 0.5, "popular": true }, { "name": "Syrups", "price": 0.5 }, { "name": "Honey", "price": 0.5 }, { "name": "Alternative milk", "price": 1, "popular": true }
     ]
   },
 
@@ -55,16 +55,16 @@
       "items": [
         { "name": "Sourdough — 1 slice", "price": 5 },
         { "name": "Sourdough — 2 slices", "price": 7 },
-        { "name": "House-baked bagel", "price": 6 }
+        { "name": "House-baked bagel", "price": 6, "popular": true }
       ]
     },
     {
       "title": "Protein",
       "items": [
         { "name": "Boiled egg", "price": 3 },
-        { "name": "Two boiled eggs", "price": 5 },
-        { "name": "Scrambled eggs", "price": 5 },
-        { "name": "Smoked salmon", "price": 8 },
+        { "name": "Two boiled eggs", "price": 5, "popular": true },
+        { "name": "Scrambled eggs", "price": 5, "popular": true },
+        { "name": "Smoked salmon", "price": 8, "popular": true },
         { "name": "Mortadella", "price": 5 },
         { "name": "Smoked ham", "price": 5 },
         { "name": "Poached chicken", "price": 7 },
@@ -74,7 +74,7 @@
     {
       "title": "Cheese",
       "items": [
-        { "name": "Halloumi", "price": 5 },
+        { "name": "Halloumi", "price": 5, "popular": true },
         { "name": "Goats feta", "price": 4 },
         { "name": "Provolone", "price": 4 },
         { "name": "Mozzarella", "price": 4 }
@@ -83,12 +83,12 @@
     {
       "title": "Add-ons",
       "items": [
-        { "name": "Avo", "price": 5 },
+        { "name": "Avo", "price": 5, "popular": true },
         { "name": "Semi roasted tomatoes", "price": 5 },
         { "name": "Fresh tomato", "price": 4 },
         { "name": "Pickles", "price": 3 },
         { "name": "Tomato relish", "price": 3 },
-        { "name": "SP chilli oil", "price": 3 },
+        { "name": "SP chilli oil", "price": 3, "popular": true },
         { "name": "House brown sauce", "price": 3 },
         { "name": "Jam", "price": 3 },
         { "name": "Vegemite", "price": 3 },
