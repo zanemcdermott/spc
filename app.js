@@ -222,6 +222,7 @@ const cartItemsEl = $('#cart-items');
 const cartTotalEl = $('#cart-total');
 const cartCountEl = $('#cart-count');
 const cartToggleBtn = $('#cart-toggle');
+const toastEl = $('#toast');
 
 const cartState = { items: [], seq: 0 };
 let menuData = null;
@@ -241,11 +242,11 @@ const selectedExtras = (config) => {
 const getUnitBasePrice = (config) => {
   if (!config) return 0;
   if (config.mode === 'item') {
-    if (config.sizes && config.selectedSize && isNumber(config.sizes[config.selectedSize])) {
-      return Number(config.sizes[config.selectedSize]);
-    }
-    if (isNumber(config.basePrice)) return Number(config.basePrice);
-    return 0;
+    const sizePrice = (config.sizes && config.selectedSize && isNumber(config.sizes[config.selectedSize]))
+      ? Number(config.sizes[config.selectedSize])
+      : (isNumber(config.basePrice) ? Number(config.basePrice) : 0);
+    const baseUpcharge = Number(config.baseUpcharge || 0);
+    return sizePrice + baseUpcharge;
   }
   if (config.mode === 'build') {
     return config.groups.reduce((total, group, index) => {
@@ -272,6 +273,22 @@ const showOverlay = () => {
 const hideOverlay = () => {
   if (!overlay) return;
   overlay.hidden = true;
+};
+
+let toastTimer = null;
+const showToast = (message) => {
+  if (!toastEl) return;
+  toastEl.textContent = message;
+  toastEl.hidden = false;
+  requestAnimationFrame(() => toastEl.classList.add('is-visible'));
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => {
+    toastEl.classList.remove('is-visible');
+    toastTimer = setTimeout(() => {
+      toastEl.hidden = true;
+      toastTimer = null;
+    }, 250);
+  }, 2200);
 };
 
 const openItemModal = (config) => {
@@ -357,6 +374,8 @@ const renderItemModal = () => {
     </section>
   `;
 
+  const notice = activeConfig.notice ? `<p class="item-notice">${activeConfig.notice}</p>` : '';
+
   const quantity = `
     <section class="item-section" data-qty>
       <h3 class="item-section__title">Quantity</h3>
@@ -367,6 +386,46 @@ const renderItemModal = () => {
       </div>
     </section>
   `;
+
+  const styleSection = (() => {
+    if (!activeConfig.styleOptions?.length) return '';
+    const pills = activeConfig.styleOptions.map((opt) => {
+      const selected = activeConfig.selectedStyle === opt.id;
+      return `
+        <label class="choice-pill ${selected ? 'is-selected' : ''}" data-style-option="${opt.id}">
+          <input type="radio" name="egg-style" value="${opt.id}" ${selected ? 'checked' : ''}>
+          <span>${opt.label}</span>
+        </label>
+      `;
+    }).join('');
+    return `
+      <section class="item-section" data-style>
+        <h3 class="item-section__title">How would you like your eggs?</h3>
+        <div class="choice-pills">${pills}</div>
+      </section>
+    `;
+  })();
+
+  const baseSection = (() => {
+    if (!activeConfig.baseOptions?.length) return '';
+    const options = activeConfig.baseOptions.map((opt) => {
+      const selected = activeConfig.selectedBase === opt.id;
+      const meta = Number(opt.price || 0) === 0 ? 'Included' : `+${formatPrice(opt.price)}`;
+      return `
+        <label class="choice-pill ${selected ? 'is-selected' : ''}" data-base-option="${opt.id}">
+          <input type="radio" name="egg-base" value="${opt.id}" ${selected ? 'checked' : ''}>
+          <span>${opt.label}</span>
+          <span class="choice-pill__meta">${meta}</span>
+        </label>
+      `;
+    }).join('');
+    return `
+      <section class="item-section" data-egg-base>
+        <h3 class="item-section__title">Choose a base</h3>
+        <div class="choice-pills">${options}</div>
+      </section>
+    `;
+  })();
 
   const sizeSection = (() => {
     if (activeConfig.mode !== 'item' || !activeConfig.sizes) return '';
@@ -418,13 +477,21 @@ const renderItemModal = () => {
   itemModalBody.innerHTML = `
     <form class="item-form" data-mode="${activeConfig.mode}">
       ${summary}
+      ${notice}
       ${quantity}
+      ${styleSection}
+      ${baseSection}
       ${sizeSection}
       ${extras}
       ${buildGroups}
       ${footer}
     </form>
   `;
+
+  if (activeConfig.mode === 'build' && activeConfig.notice) {
+    const targetGroup = itemModalBody.querySelector('[data-build-group]');
+    if (targetGroup) targetGroup.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
 };
 
 /* ---------- Config builders ---------- */
@@ -504,6 +571,11 @@ const createItemConfig = ({ kind, category, index, itemKey }) => {
     quantity: 1,
     extraGroups: buildExtraGroups(kind, item),
     selectedExtras: new Set(),
+    styleOptions: null,
+    selectedStyle: null,
+    baseOptions: null,
+    selectedBase: null,
+    baseUpcharge: 0,
   };
 
   if (item.sizes || item.priceSmall != null || item.priceLarge != null) {
@@ -520,6 +592,26 @@ const createItemConfig = ({ kind, category, index, itemKey }) => {
     config.selectedSize = defaultSize;
     config.baseLabel = 'Select a size';
     config.basePrice = null;
+  }
+
+  if (category === 'eggs' || itemKey === 'eggs') {
+    config.styleOptions = [
+      { id: 'fried', label: 'Fried' },
+      { id: 'scrambled', label: 'Scrambled' },
+      { id: 'boiled', label: 'Boiled' },
+    ];
+    config.selectedStyle = 'fried';
+
+    const bagelUpcharge = item.bagelUpcharge ?? 0;
+    const gfUpcharge = item.gfUpcharge ?? item.gfOption ?? 0;
+
+    config.baseOptions = [
+      { id: 'sourdough', label: 'Sourdough', price: 0 },
+      { id: 'bagel', label: 'House-baked bagel', price: Number(bagelUpcharge || 0) },
+      { id: 'gluten-free', label: 'Gluten free bread', price: Number(gfUpcharge || 0) },
+    ];
+    config.selectedBase = 'sourdough';
+    config.baseUpcharge = 0;
   }
 
   return config;
@@ -548,6 +640,8 @@ const createBuildConfig = () => {
     groups,
     selections: groups.map(() => new Set()),
     errors: {},
+    allowBaseless: false,
+    notice: '',
   };
 
   return config;
@@ -568,6 +662,11 @@ const applyCartItemToConfig = (item) => {
       }
       return selected;
     });
+    const baseGroupIndex = config.groups.findIndex((group) => group.selection === 'single');
+    if (baseGroupIndex >= 0 && !config.selections[baseGroupIndex].size) {
+      config.allowBaseless = true;
+      config.notice = 'No base selected. Add a base or leave it as “No base”.';
+    }
     return config;
   }
 
@@ -578,6 +677,19 @@ const applyCartItemToConfig = (item) => {
   if (config.sizes && item.size && config.sizes[item.size] != null) {
     config.selectedSize = item.size;
   }
+  if (config.styleOptions && item.style) {
+    const exists = config.styleOptions.find((opt) => opt.id === item.style);
+    if (exists) config.selectedStyle = item.style;
+  }
+  if (config.baseOptions) {
+    const baseOption = item.baseId ? config.baseOptions.find((opt) => opt.id === item.baseId) : config.baseOptions[0];
+    if (baseOption) {
+      config.selectedBase = baseOption.id;
+      config.baseUpcharge = Number(baseOption.price || 0);
+    } else if (item.baseUpcharge != null) {
+      config.baseUpcharge = Number(item.baseUpcharge);
+    }
+  }
   const extraIds = item.extras?.map((extra) => extra.id) || [];
   config.selectedExtras = new Set(extraIds);
   return config;
@@ -587,14 +699,24 @@ const applyCartItemToConfig = (item) => {
 const serializeConfigToCartItem = (config) => {
   if (!config) return null;
   if (config.mode === 'build') {
-    const groups = config.groups.map((group, index) => ({
-      index,
-      title: group.title,
-      items: [...config.selections[index]].map((choiceId) => {
-        const option = group.items.find((item) => item.id === choiceId);
-        return option ? { id: option.id, name: option.name, price: Number(option.price) } : null;
-      }).filter(Boolean),
-    })).filter((group) => group.items.length);
+    const groups = config.groups
+      .map((group, index) => {
+        const chosen = [...config.selections[index]].map((choiceId) => {
+          const option = group.items.find((item) => item.id === choiceId);
+          return option ? { id: option.id, name: option.name, price: Number(option.price) } : null;
+        }).filter(Boolean);
+
+        if (!chosen.length && group.selection === 'single') {
+          chosen.push({ id: `${group.id}-no-base`, name: 'No base', price: null, placeholder: true });
+        }
+
+        return {
+          index,
+          title: group.title,
+          items: chosen,
+        };
+      })
+      .filter((group) => group.items.length);
 
     return {
       id: config.cartId || `c${++cartState.seq}`,
@@ -615,6 +737,10 @@ const serializeConfigToCartItem = (config) => {
     groupTitle: extra.groupTitle,
   }));
 
+  const styleLabel = config.styleOptions?.find((opt) => opt.id === config.selectedStyle)?.label || null;
+  const baseLabel = config.baseOptions?.find((opt) => opt.id === config.selectedBase)?.label || null;
+  const basePrice = Number(config.baseUpcharge || 0);
+
   return {
     id: config.cartId || `c${++cartState.seq}`,
     mode: 'item',
@@ -626,6 +752,11 @@ const serializeConfigToCartItem = (config) => {
     name: config.name,
     quantity: config.quantity,
     size: config.selectedSize || null,
+    style: config.selectedStyle || null,
+    styleLabel,
+    baseId: config.selectedBase || null,
+    baseLabel,
+    baseUpcharge: basePrice,
     basePrice: getUnitBasePrice(config),
     extras,
   };
@@ -647,13 +778,21 @@ const renderCartItem = (item) => {
   const unit = formatPrice(getCartItemUnitTotal(item));
   const total = formatPrice(getCartItemTotal(item));
   const sizeLabel = item.size === 'small' ? 'Small' : item.size === 'large' ? 'Large' : item.size;
+  const metaParts = [`${unit} each`];
+  if (item.styleLabel) metaParts.push(item.styleLabel);
+  else if (item.style) metaParts.push(item.style.charAt(0).toUpperCase() + item.style.slice(1));
+  if (item.baseLabel) metaParts.push(item.baseUpcharge ? `${item.baseLabel} (+${formatPrice(item.baseUpcharge)})` : item.baseLabel);
 
   const extrasList = (() => {
     if (item.mode === 'build') {
       if (!item.groups?.length) return '';
-      const lines = item.groups.map((group) => `
-        <li>${group.title}: ${group.items.map((choice) => `${choice.name} (${formatPrice(choice.price)})`).join(', ')}</li>
-      `).join('');
+      const lines = item.groups.map((group) => {
+        const entries = group.items.map((choice) => {
+          if (choice.price == null) return choice.name;
+          return `${choice.name} (${formatPrice(choice.price)})`;
+        }).join(', ');
+        return `<li>${group.title}: ${entries}</li>`;
+      }).join('');
       return `<ul class="cart-item__extras">${lines}</ul>`;
     }
     if (!item.extras?.length) return '';
@@ -668,7 +807,7 @@ const renderCartItem = (item) => {
       <div class="cart-item__top">
         <div>
           <h3 class="cart-item__title">${item.name}${sizeLabel ? ` — ${sizeLabel}` : ''}</h3>
-          <p class="cart-item__meta">${unit} each</p>
+          <p class="cart-item__meta">${metaParts.join(' · ')}</p>
           ${extrasList}
         </div>
         <button type="button" class="cart-item__remove" data-cart-action="remove">Remove</button>
@@ -750,13 +889,13 @@ const renderBuild = (groups) => {
   const container = $('#build-groups');
   if (!container) return;
   const cta = `
-    <section class="byo-group byo-cta">
+    <button type="button" class="byo-group byo-cta" data-build-start aria-label="Start building your own order">
       <div class="byo-cta__body">
         <h3>Build your order</h3>
         <p class="muted">Pick a base, stack proteins, cheeses and add-ons, then add it straight to your cart.</p>
-        <button type="button" class="btn btn--cream" data-build-start>Start building</button>
+        <span class="byo-cta__hint">Tap to start</span>
       </div>
-    </section>
+    </button>
   `;
   const groupsHtml = (groups || []).map(byoGroup).join('');
   const showcase = [
@@ -921,6 +1060,28 @@ itemModalBody?.addEventListener('click', (event) => {
     return;
   }
 
+  const stylePill = event.target.closest('[data-style-option]');
+  if (stylePill && activeConfig.mode === 'item' && activeConfig.styleOptions) {
+    const styleId = stylePill.dataset.styleOption;
+    if (styleId && activeConfig.styleOptions.some((opt) => opt.id === styleId)) {
+      activeConfig.selectedStyle = styleId;
+      renderItemModal();
+    }
+    return;
+  }
+
+  const basePill = event.target.closest('[data-base-option]');
+  if (basePill && activeConfig.mode === 'item' && activeConfig.baseOptions) {
+    const baseId = basePill.dataset.baseOption;
+    const option = activeConfig.baseOptions.find((opt) => opt.id === baseId);
+    if (option) {
+      activeConfig.selectedBase = baseId;
+      activeConfig.baseUpcharge = Number(option.price || 0);
+      renderItemModal();
+    }
+    return;
+  }
+
   const extraTile = event.target.closest('.option-tile[data-extra]');
   if (extraTile && activeConfig.mode === 'item') {
     const id = extraTile.dataset.extra;
@@ -940,6 +1101,8 @@ itemModalBody?.addEventListener('click', (event) => {
     if (type === 'single') {
       activeConfig.selections[groupIndex] = new Set([optionId]);
       activeConfig.errors[`group-${groupIndex}`] = '';
+      activeConfig.notice = '';
+      activeConfig.allowBaseless = false;
     } else {
       if (selection.has(optionId)) selection.delete(optionId);
       else selection.add(optionId);
@@ -958,6 +1121,22 @@ itemModalBody?.addEventListener('change', (event) => {
     else activeConfig.selectedExtras.delete(id);
     renderItemModal();
   }
+  if (input.matches('[name="egg-style"]') && activeConfig.styleOptions) {
+    const styleId = input.value;
+    if (styleId && activeConfig.styleOptions.some((opt) => opt.id === styleId)) {
+      activeConfig.selectedStyle = styleId;
+      renderItemModal();
+    }
+  }
+  if (input.matches('[name="egg-base"]') && activeConfig.baseOptions) {
+    const baseId = input.value;
+    const option = activeConfig.baseOptions.find((opt) => opt.id === baseId);
+    if (option) {
+      activeConfig.selectedBase = baseId;
+      activeConfig.baseUpcharge = Number(option.price || 0);
+      renderItemModal();
+    }
+  }
   if (input.matches('[data-build-input]') && activeConfig.mode === 'build') {
     const groupIndex = Number(input.closest('[data-build-group]')?.dataset.buildGroup);
     if (Number.isNaN(groupIndex)) return;
@@ -966,6 +1145,8 @@ itemModalBody?.addEventListener('change', (event) => {
     const selection = activeConfig.selections[groupIndex];
     if (type === 'single') {
       activeConfig.selections[groupIndex] = new Set([optionId]);
+      activeConfig.notice = '';
+      activeConfig.allowBaseless = false;
     } else {
       if (input.checked) selection.add(optionId);
       else selection.delete(optionId);
@@ -981,8 +1162,11 @@ itemModalBody?.addEventListener('submit', (event) => {
 
   if (activeConfig.mode === 'build') {
     const baseGroupIndex = activeConfig.groups.findIndex((group) => group.selection === 'single');
-    if (baseGroupIndex >= 0 && !activeConfig.selections[baseGroupIndex].size) {
-      activeConfig.errors[`group-${baseGroupIndex}`] = 'Choose a base to continue.';
+    const missingBase = baseGroupIndex >= 0 && !activeConfig.selections[baseGroupIndex].size;
+    if (missingBase && !activeConfig.allowBaseless) {
+      activeConfig.allowBaseless = true;
+      activeConfig.errors[`group-${baseGroupIndex}`] = 'No base selected — add one or continue to add as “No base”.';
+      activeConfig.notice = 'No base selected. You can add a base now or continue and we will mark this order as “No base”.';
       renderItemModal();
       return;
     }
@@ -991,7 +1175,7 @@ itemModalBody?.addEventListener('submit', (event) => {
   if (activeConfig.cartId) updateCartItem(activeConfig);
   else addToCart(activeConfig);
   closeItemModal();
-  openCartDrawer();
+  showToast('Added to cart');
 });
 
 cartToggleBtn?.addEventListener('click', () => {

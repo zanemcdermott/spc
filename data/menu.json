@@ -12,7 +12,7 @@
       { "name": "Beef Sandwich", "price": 19.9, "desc": "Rare roast beef • provolone • rocket • zucchini pickles • horseradish on scotch loaf" },
       { "name": "Ham + Double Cheese", "price": 14.9, "desc": "Smoked ham • provolone • mozzarella • tomato relish on toasted sourdough or croissant" }
     ],
-    "eggs": { "name": "Eggs Your Way", "price": 13.9, "desc": "Your choice of fried, scrambled or boiled eggs on sourdough / house baked bagel", "gfOption": 3.5 },
+    "eggs": { "name": "Eggs Your Way", "price": 13.9, "desc": "Your choice of fried, scrambled or boiled eggs on sourdough / house baked bagel", "gfOption": 3.5, "bagelUpcharge": 2, "gfUpcharge": 3.5 },
     "extras": [
       { "name": "Bacon", "price": 7, "popular": true }, { "name": "Poached chicken", "price": 6 }, { "name": "Smoked ham", "price": 5 }, { "name": "Smoked salmon", "price": 8, "popular": true },
       { "name": "Avocado", "price": 5, "popular": true }, { "name": "Semi roasted tomatoes", "price": 5 }, { "name": "Halloumi", "price": 6, "popular": true }, { "name": "Goats feta", "price": 4 },
