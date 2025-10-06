@@ -43,12 +43,12 @@ const formatPriceFromItem = (item) => {
 // Map of normalized item names → image path in /images
 const imageMap = {
   'bne toastie': 'images/bne-toastie.png',
-  'peach + nduja tartine': 'images/tartine.png', // swap if you add a peach image later
+  'peach + nduja tartine': 'images/tartine.png', 
   'avo toast': 'images/avo-toast.png',
   'sp fruit salad': 'images/fruit.png',
   'salmon bagel': 'images/salmon-bagel.png',
   'nduja chilli scrambled eggs': 'images/chilli-eggs.png',
-  'chicken sandwich': 'images/chicken-sandwhich.png', // file is spelled this way in your folder
+  'chicken sandwich': 'images/chicken-sandwich.png',
   'salad sandwich': 'images/salad-sandwich.png',
   'beef sandwich': 'images/beef-sandwich.png',
   'ham + double cheese': 'images/ham-cheese.png',
